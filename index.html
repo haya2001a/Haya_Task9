@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <!-- materialize -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+  <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"crossorigin="anonymous">  
+  <title>Cars Company</title>
+</head>
+<body>
+  
+  <div class="container">
+    <div class="row">
+      <div class=" col-md-10 col-sm-9 col">
+        <div id="main" class="card">
+          <div class="card-content">
+            <span class="card-title">Car Company's Website </span>
+            <label id="again"></label>
+            <div class="row">
+              <form class="test" id="car-form" action="add.php">
+                <div class="input-field col-sm-12">
+                  <input type="text" name="car" id="car" id="myInput" placeholder="Enter a new car company">
+                </div>
+            </div>
+            <input type="submit" value="Add car" id="button" class="btn " >
+            </form>
+          </div>
+          <div class="card-action">
+            <h5 id="car-title">Cars List</h5>
+            <div class="inout-field col s12">
+              <input type="text" name="filter" id="filter" placeholder="Enter text to filter ">
+        
+            </div>
+           
+            <ul class="collection list-group mt-5 ">
+            </ul>
+            <a class="clear-cars btn " href="#">Clear projects</a>
+ 
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<script src="app.js"></script>
+</body>
+</html>
