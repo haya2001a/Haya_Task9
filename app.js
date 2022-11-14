@@ -1,4 +1,3 @@
-
 //  UI Variables
 const form = document.querySelector("#car-form");
 const carList = document.querySelector('ul.collection');
@@ -68,33 +67,46 @@ function clearcarsFromLocalStorage() {
 
 function removecar(e) {
   if (e.target.parentElement.classList.contains("delete-item")) {
-
-    Swal.fire({
-      title: 'Are you sure?',
-      text: "You won't be able to revert this!",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        e.target.parentElement.parentElement.remove();
-
-        removecarFromLocalStorage(e.target.parentElement.parentElement);
-        Swal.fire(
-          'Deleted!',
-          'Your file has been deleted.',
-          'success'
-        )
-      }
-    })
-
-
+  
+    // swal({
+    //   title: "Are you sure?",
+    //   text: "You will not be able to recover this imaginary file!",
+    //   type: "warning",
+    //   showCancelButton: true,
+    //   confirmButtonClass: 'btn-danger',
+    //   confirmButtonText: 'Yes, delete it!',
+    //   closeOnConfirm: false,
+    //   closeOnCancel: false
+    // },
+    // function (isConfirm) {
+    //   if (isConfirm) {
+        
+    //     swal("Deleted!", "Your imaginary file has been deleted!", "success");
+    //   } else {
+    //     swal("Cancelled", "Your imaginary file is safe :)", "error");
+    //   }
+    // }); 
     
+    swal({
+      title:'Are You Sure ? ? ',
+      text:'The file will be deleted ',
+      type:'warning',
+      showCancelButton:true,
+      confirmButtonText:'yes , delete it ',
+      cancelButtonText:'No keep it ',
+    }).then((result)=>{
+      if(result.value){
+        swal('deleted!','your file has been deleted','success')
+        e.target.parentElement.parentElement.remove();
+      removecarFromLocalStorage(e.target.parentElement.parentElement);
+
+      }else if (result.dismiss===swal.DismissReason.cancel){
+        swal('canceled','ur file deleted','error')
+      }
+
+    })
   }
 }
-
 function removecarFromLocalStorage(carItem) {
   let cars;
   if (localStorage.getItem('cars') === null) {
@@ -102,45 +114,35 @@ function removecarFromLocalStorage(carItem) {
   } else {
     cars = JSON.parse(localStorage.getItem('cars'));
   }
-
   cars.forEach(function(carName, index) {
     if (carItem.textContent === carName)  {
       cars.splice(index, 1);
     }
   });
-
   localStorage.setItem('cars', JSON.stringify(cars));
-
 }
-
 function addcar(e) {
   if(carInput.value === '') {
-    
-    Swal.fire({
-      icon: 'error',
-      title: 'Error',
-      text: 'Enter a company Name :',
-    })
-  }
+    swal('oops...','U have to enter a Company name !','error');  
+  e.preventDefault();    
+}
 else{
-
-
   const li = document.createElement('li');
-  li.className = 'collection-item ';
+  li.className = 'collection-item list-group-item';
   li.appendChild(document.createTextNode(carInput.value));
   const link = document.createElement('a');
   link.className = 'delete-item secondary-content';
-  link.innerHTML = '<i class="fa fa-trash" aria-hidden="true"></i>';
+  link.innerHTML = '<i class="fa fa-trash"></i>';
   li.appendChild(link);
   carList.appendChild(li);
 
   storecarInLocalStorage(carInput.value);
   carInput.value = '';
+  e.preventDefault();  
 }
   e.preventDefault();
-
-  
 }
+
 function storecarInLocalStorage(carName) {
   let cars;
   if (localStorage.getItem('cars') === null) {
@@ -148,7 +150,6 @@ function storecarInLocalStorage(carName) {
   } else {
     cars = JSON.parse(localStorage.getItem('cars'));
   }
-
   cars.push(carName);
   localStorage.setItem('cars', JSON.stringify(cars));
 }
